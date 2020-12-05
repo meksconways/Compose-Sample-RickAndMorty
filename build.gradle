@@ -1,0 +1,39 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        compose_version = '1.0.0-alpha08'
+    }
+
+    ext.kotlin_version = "1.4.20"
+
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.0-alpha02"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.apollographql.apollo:apollo-gradle-plugin:2.3.1")
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28-alpha'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+tasks.register("downloadRickAndMortySchema", com.apollographql.apollo.gradle.internal.ApolloDownloadSchemaTask) {
+    endpoint = "https://rickandmortyapi.com/graphql"
+    schemaRelativeToProject = "app/src/main/graphql/com/meksconway/compose_sample_rickandmorty/schema.json"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

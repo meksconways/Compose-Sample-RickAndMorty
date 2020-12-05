@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Compose-Sample-RickAndMorty</string>
+    <string name="appbar_title">Rick And Morty</string>
+</resources>
